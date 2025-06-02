@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:object="${stafff}" action="/staff/create/save-bai2" method="post" enctype="multipart/form-data">
+    Email: <input th:field="*{id}"><i th:errors="*{id}"></i><hr>
+    Họ và tên: <input th:field="*{fullname}"><i th:errors="*{fullname}"></i><hr>
+    Giới tính:
+    <input type="radio" th:field="*{gender}" value="true">Nam
+    <input type="radio" th:field="*{gender}" value="false">Nữ
+    <i th:errors="*{gender}"></i><hr>
+    Hình ảnh:
+    <input th:field="*{photo}" type="hidden">
+    <input name="photo_file" type="file"><hr>
+    Ngày sinh: <input name="birthday" th:value="*{#dates.format(birthday, 'MM/dd/yyyy')}">
+    <i th:errors="*{birthday}"></i><hr>
+    Salary: <input th:field="*{salary}"><i th:errors="*{salary}"></i><hr>
+    <button>Validate</button>
+</form>
+
+<style> i { color: red; } </style>
+</body>
+</html>
