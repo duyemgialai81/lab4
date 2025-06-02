@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+<html th:replace="~{/shared/layout::view(~{::title}, ~{::article})}">
 <head>
-    <title>Title</title>
+    <title>Trang chủ</title>
     <meta charset="UTF-8">
 </head>
 <body>
-<!-- home.html -->
-<h1 th:text="#{menu.about}">Giới thiệu</h1>
+<article>
+    <h1 th:text="#{menu.about}">Giới thiệu</h1>
+    <img src="/photos/photo.png">
+</article>
 </body>
 </html>
+
+

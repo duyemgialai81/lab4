@@ -16,19 +16,20 @@ import java.util.Locale;
 @Configuration
 public class MessageConfig implements WebMvcConfigurer {
 
-    @Bean("messageSource")
-    public MessageSource getMessageSource() {
+    @Bean
+    public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
         ms.setBasenames("classpath:i18n/layout");
         ms.setDefaultEncoding("UTF-8");
         return ms;
     }
 
-    @Bean("localeResolver")
-    public LocaleResolver getLocaleResolver() {
+    @Bean
+    public LocaleResolver localeResolver() {
         CookieLocaleResolver resolver = new CookieLocaleResolver();
+        resolver.setCookieName("lang");
         resolver.setCookiePath("/");
-        resolver.setCookieMaxAge(Duration.ofDays(30));
+        resolver.setCookieMaxAge((int) Duration.ofDays(30).getSeconds());
         resolver.setDefaultLocale(new Locale("vi"));
         return resolver;
     }
@@ -36,7 +37,7 @@ public class MessageConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
-        interceptor.setParamName("lang");
+        interceptor.setParamName("lang"); // ?lang=en or ?lang=vi
         registry.addInterceptor(interceptor);
     }
 }
